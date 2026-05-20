@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --brand-teal: #0D9488;
+    --brand-navy: #1E40AF;
+    --brand-mint: #10B981;
+}
+
+body {
+    @apply bg-slate-50 text-slate-900;
+}
+
+.mesh-gradient {
+    background-color: #7C3AED;
+    background-image: 
+        radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(174,84%,31%,1) 0, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(339,49%,30%,1) 0, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(20,90%,50%,1) 0, transparent 50%);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--brand-teal), var(--brand-navy));
+    @apply transition-all duration-200;
+}
+
+.btn-primary:hover {
+    @apply -translate-y-0.5 shadow-lg shadow-teal-500/30;
+}
