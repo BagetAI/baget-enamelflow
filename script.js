@@ -1,13 +1,11 @@
-const DB_ID = 'enamelflow-waitlist-5921'; 
-
 async function handleWaitlistSubmit(event) {
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
     const data = {
+        companyId: "ec34e8e2-4cbb-404f-b0e0-34cbf459f638",
         email: formData.get('email'),
-        practice_name: formData.get('practice_name'),
-        source: 'landing_page'
+        name: formData.get('practice_name')
     };
 
     const submitBtn = form.querySelector('button[type="submit"]');
@@ -16,12 +14,12 @@ async function handleWaitlistSubmit(event) {
     submitBtn.disabled = true;
 
     try {
-        const response = await fetch(`https://app.baget.ai/api/public/databases/${DB_ID}/rows`, {
+        const response = await fetch(`https://app.baget.ai/api/leads`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ data })
+            body: JSON.stringify(data)
         });
 
         if (response.ok) {
@@ -34,7 +32,6 @@ async function handleWaitlistSubmit(event) {
                 <h3 class="text-xl font-bold text-slate-900">You're on the list!</h3>
                 <p class="text-slate-600">We'll reach out soon to discuss your practice's flow.</p>
             </div>`;
-            updateCount();
         } else {
             throw new Error('Submission failed');
         }
@@ -45,20 +42,3 @@ async function handleWaitlistSubmit(event) {
         submitBtn.disabled = false;
     }
 }
-
-async function updateCount() {
-    try {
-        const response = await fetch(`https://app.baget.ai/api/public/databases/${DB_ID}/count`);
-        const result = await response.json();
-        const countEl = document.getElementById('waitlist-count');
-        if (countEl && result.count !== undefined) {
-            countEl.innerText = result.count + 42; 
-        }
-    } catch (err) {
-        console.error('Failed to fetch count', err);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    updateCount();
-});
