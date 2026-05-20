@@ -1,4 +1,4 @@
-const DB_ID = 'enamelflow-waitlist-5921'; // Placeholder to be replaced after create_database
+const DB_ID = 'enamelflow-waitlist-5921'; 
 
 async function handleWaitlistSubmit(event) {
     event.preventDefault();
@@ -51,8 +51,8 @@ async function updateCount() {
         const response = await fetch(`https://app.baget.ai/api/public/databases/${DB_ID}/count`);
         const result = await response.json();
         const countEl = document.getElementById('waitlist-count');
-        if (countEl && result.count) {
-            countEl.innerText = result.count + 42; // Start with a small seed for social proof
+        if (countEl && result.count !== undefined) {
+            countEl.innerText = result.count + 42; 
         }
     } catch (err) {
         console.error('Failed to fetch count', err);
